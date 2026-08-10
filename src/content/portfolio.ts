@@ -117,13 +117,14 @@ export const profile: ProfileData = {
     "React",
     "Tailwind CSS",
     "GSAP",
+    "Blender",
   ],
 
   // The "Years Shipping / Products Launched / …" stat band.
   stats: [
     { id: "stat-1", label: "Years Shipping", value: "03+" },
     { id: "stat-2", label: "Websites Deployed", value: "33+" },
-    { id: "stat-3", label: "Aura", value: "∞^2" },
+    { id: "stat-3", label: "Aura", value: "∞" },
     { id: "stat-4", label: "Video edited", value: "50+" },
   ],
 };
@@ -134,17 +135,17 @@ export const profile: ProfileData = {
 export const projects: ProjectData[] = [
   {
     id: "project-1",
-    title: "Nexus AI",
-    category: "Core Engine",
+    title: "CyberVerce - filter catogory",
+    category: "E-comerce",
     description:
-      "A distributed inference gateway with streaming UI, sub-100ms cold routing and a fully typed edge runtime.",
-    tech: "Next.js, Rust, WebAssembly, Postgres",
-    url: "https://vercel.com",
-    year: "2024",
+      "A simple Sylani Web-dev course assigment to simply add a filter using JS, but insect in me says make it super UI, so.....",
+    tech: "HTML, CSS, JS, fot this project",
+    url: "https://0wais-raza.github.io/CyberVerse/",
+    year: "2026",
   },
   {
     id: "project-2",
-    title: "Velocity CRM",
+    title: "shown soon",
     category: "Architecture",
     description:
       "Realtime pipeline CRM for high-velocity sales teams — optimistic mutations, offline sync and audit trails.",
@@ -154,7 +155,7 @@ export const projects: ProjectData[] = [
   },
   {
     id: "project-3",
-    title: "Aura Studio",
+    title: "shown soon",
     category: "Visual Brand",
     description:
       "An award-leaning studio site driven by GSAP scroll choreography and a custom WebGL shader background.",
@@ -164,7 +165,7 @@ export const projects: ProjectData[] = [
   },
   {
     id: "project-4",
-    title: "Kinetic Commerce",
+    title: "shown soon",
     category: "Commerce",
     description:
       "Headless storefront with kinetic product transitions and a checkout that converts on first intent.",
@@ -249,18 +250,18 @@ export const videos: MediaData[] = [
 export const disciplines: Discipline[] = [
   {
     title: "Motion Engineering",
-    body: "GSAP timelines, ScrollTrigger choreography and Lenis-driven scroll systems that stay at 60fps on mid-range hardware.",
-    items: ["GSAP", "ScrollTrigger", "SplitText", "Lenis", "WebGL"],
+    body: "GSAP in Webdev, and mastery of After effects in premium visual motions",
+    items: ["GSAP", "ScrollTrigger", "After effects", "Apple UI", "3d Camrta"],
   },
   {
     title: "Fullstack Architecture",
     body: "Typed end-to-end systems: edge runtimes, realtime data, resilient queues and schemas designed to survive scale.",
-    items: ["TypeScript", "React", "Node", "Postgres", "Rust"],
+    items: ["TypeScript", "React", "HTML", "CCS", "JS"],
   },
   {
     title: "Editorial Interface Design",
     body: "Design systems with opinionated typography, restrained palettes and a token layer that keeps every surface coherent.",
-    items: ["Design tokens", "Tailwind", "Figma", "Type systems"],
+    items: ["Design tokens", "Tailwind", "Figma", "Photoshop", "VFX"],
   },
 ];
 
