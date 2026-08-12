@@ -145,13 +145,13 @@ export const projects: ProjectData[] = [
   },
   {
     id: "project-2",
-    title: "shown soon",
-    category: "Architecture",
+    title: "Meeral collection",
+    category: "e-commerce",
     description:
-      "Realtime pipeline CRM for high-velocity sales teams — optimistic mutations, offline sync and audit trails.",
-    tech: "React, tRPC, Postgres, Redis",
-    url: "https://linear.app",
-    year: "2023",
+      "Realtime E comerce store for small brand named Meeral collection, with working data base!",
+    tech: "React, TypeScript, MongoDB, Tailwind",
+    url: "https://meeral-collection.vercel.app/",
+    year: "2026",
   },
   {
     id: "project-3",

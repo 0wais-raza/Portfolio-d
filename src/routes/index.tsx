@@ -12,7 +12,7 @@ import { MediaPortfolio } from "@/components/MediaPortfolio";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Muhammad Owais Raza — Aesthetic Engineer & Fullstack Architect" },
+      { title: "Muhammad Owais Raza — Motion engineer & Fullstack Architect" },
       {
         name: "description",
         content:
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Muhammad Owais Raza — Aesthetic Engineer",
+        content: "Muhammad Owais Raza — Tech Engineer",
       },
       {
         property: "og:description",
