@@ -106,7 +106,7 @@ export const profile: ProfileData = {
   insta: "https://www.instagram.com/itz_professionalofficial/",
 
   // Animated role rotation in the hero — each entry gets its own line/badge.
-  roles: ["Video Editor", "Graphic Designer", "Web Designer & Developer", "FX Learner"],
+  roles: ["Web developer", "Web designer too", "Professional Video editor", "Seamless AI media producer"],
 
   // Scrolling text band under the hero.
   marquee: [
