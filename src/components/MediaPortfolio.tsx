@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { gsap, registerGsap } from "@/lib/gsap";
 import { usePortfolio, type Media } from "@/lib/store";
 import { useHydrated } from "@/hooks/use-hydrated";
@@ -6,7 +7,7 @@ import { SplitHeading, Reveal } from "@/components/Motion";
 
 function Lightbox({ item, onClose }: { item: Media; onClose: () => void }) {
   const isVideo = /youtube|vimeo|\.mp4|\.webm/i.test(item.url);
-  return (
+  const dialog = (
     <div
       role="dialog"
       aria-modal="true"
@@ -18,9 +19,9 @@ function Lightbox({ item, onClose }: { item: Media; onClose: () => void }) {
         onClick={(e) => e.stopPropagation()}
         className="glass w-full max-w-4xl overflow-hidden rounded-3xl"
       >
-        <div className="aspect-video w-full bg-surface-high">
-          {isVideo ? (
-            /\.(mp4|webm)$/i.test(item.url) ? (
+        {isVideo ? (
+          <div className="aspect-video w-full bg-surface-high">
+            {/\.(mp4|webm)$/i.test(item.url) ? (
               <video src={item.url} controls autoPlay className="h-full w-full" />
             ) : (
               <iframe
@@ -30,11 +31,17 @@ function Lightbox({ item, onClose }: { item: Media; onClose: () => void }) {
                 allowFullScreen
                 className="h-full w-full"
               />
-            )
-          ) : (
-            <img src={item.url} alt={item.title} className="h-full w-full object-contain" />
-          )}
-        </div>
+            )}
+          </div>
+        ) : (
+          <div className="grid max-h-[62vh] min-h-[38vh] w-full place-items-center bg-surface-high md:max-h-[68vh]">
+            <img
+              src={item.url}
+              alt={item.title}
+              className="max-h-[56vh] w-auto max-w-full object-contain md:max-h-[62vh]"
+            />
+          </div>
+        )}
         <div className="flex items-start justify-between gap-4 p-6">
           <div className="min-w-0">
             <h3 className="font-display text-xl font-black uppercase tracking-tight">
@@ -55,6 +62,12 @@ function Lightbox({ item, onClose }: { item: Media; onClose: () => void }) {
       </div>
     </div>
   );
+
+  // position:fixed breaks inside ScrollSmoother's transformed #smooth-content
+  // (fixed behaves like absolute there), so the dialog would float far off-screen
+  // when opened after scrolling. Render it on <body> instead. Client-only.
+  if (typeof document === "undefined") return null;
+  return createPortal(dialog, document.body);
 }
 
 /** YouTube/Vimeo embeds expose a thumbnail; direct files fall back to the grain. */
@@ -113,7 +126,7 @@ function Grid({
   return (
     <div
       ref={grid}
-      className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+      className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
       style={{ perspective: "1200px" }}
     >
       {items.map((m, i) => (

@@ -1,5 +1,10 @@
 import { create } from "zustand";
-import { siteData, type Discipline, type TimelineEntry } from "@/content/portfolio";
+import {
+  siteData,
+  type Discipline,
+  type TimelineEntry,
+  type ProcessStep,
+} from "@/content/portfolio";
 
 export type Project = {
   id: string;
@@ -54,6 +59,9 @@ type PortfolioState = {
   videos: Media[];
   disciplines: Discipline[];
   timeline: TimelineEntry[];
+  manifesto: string[];
+  processIntro: string;
+  process: ProcessStep[];
   loaded: boolean;
   /** Kept for API compatibility — content is static now, nothing to fetch. */
   hydrate: () => Promise<void>;
@@ -70,6 +78,9 @@ export const usePortfolio = create<PortfolioState>()((set, get) => ({
   videos: siteData.videos,
   disciplines: siteData.disciplines,
   timeline: siteData.timeline,
+  manifesto: siteData.manifesto,
+  processIntro: siteData.processIntro,
+  process: siteData.process,
   loaded: true,
 
   hydrate: async () => {

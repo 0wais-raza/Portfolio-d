@@ -39,7 +39,7 @@ export function SiteFooter() {
           {[
             { href: profile.github, label: "GitHub" },
             { href: profile.linkedin, label: "LinkedIn" },
-            { href: profile.twitter, label: "Twitter" },
+            { href: profile.insta, label: "Instagram" },
             { href: `mailto:${profile.email}`, label: profile.email },
           ].map((l) => (
             <a

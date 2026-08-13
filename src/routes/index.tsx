@@ -8,6 +8,8 @@ import { DrawnDivider, DrawnBracket } from "@/components/DrawnSvg";
 import { ProjectThumb } from "@/components/ProjectThumb";
 import { TechMarquee } from "@/components/TechMarquee";
 import { MediaPortfolio } from "@/components/MediaPortfolio";
+import { StoryManifesto } from "@/components/StoryManifesto";
+import { StoryProcess } from "@/components/StoryProcess";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -265,12 +267,12 @@ function HeroSequence() {
 
           <div
             ref={cta}
-            className="relative z-30 flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6 w-full max-w-md px-4 pointer-events-auto"
+            className="relative z-30 mt-6 flex w-full max-w-md flex-col items-stretch justify-center gap-3 px-4 pointer-events-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4"
           >
             <Link
               to="/contact"
               data-magnetic
-              className="mono-label rounded-full bg-primary px-6 py-3 sm:px-10 sm:py-4 text-primary-foreground shadow-(--glow-cyan) transition-transform hover:scale-105 text-xs sm:text-sm"
+              className="mono-label rounded-full bg-primary px-6 py-3.5 text-center text-primary-foreground shadow-(--glow-cyan) transition-transform hover:scale-105 text-xs sm:w-auto sm:px-10 sm:py-4 sm:text-sm"
             >
               Contact Me
             </Link>
@@ -280,7 +282,7 @@ function HeroSequence() {
               download={profile.cvUrl ? "Muhammad_Owais_Raza_CV.pdf" : undefined}
               data-magnetic
               aria-disabled={!profile.cvUrl}
-              className={`mono-label rounded-full border border-primary/40 bg-surface/80 px-6 py-3 sm:px-8 sm:py-4 text-foreground backdrop-blur-md transition-all hover:border-primary hover:bg-primary/10 hover:scale-105 flex items-center justify-center gap-2 text-xs sm:text-sm flex-1 sm:flex-none whitespace-nowrap ${
+              className={`mono-label rounded-full border border-primary/40 bg-surface/80 px-6 py-3.5 text-foreground backdrop-blur-md transition-all hover:border-primary hover:bg-primary/10 hover:scale-105 flex items-center justify-center gap-2 text-xs sm:w-auto sm:flex-none sm:px-8 sm:py-4 whitespace-nowrap sm:text-sm ${
                 profile.cvUrl ? "" : "pointer-events-none opacity-40"
               }`}
             >
@@ -338,7 +340,7 @@ function HeroSequence() {
         </div>
       </div>
 
-      <div className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 opacity-70">
+      <div className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 z-30 hidden flex-col items-center gap-2 opacity-70 md:flex">
         <span className="mono-label text-[10px] uppercase tracking-widest text-muted-foreground">
           Scroll to explore
         </span>
@@ -397,6 +399,21 @@ function Marquee() {
         duration: 0.8,
         ease: "power3.out",
       });
+      // Counter-drift: the whole band glides laterally as it crosses the viewport.
+      gsap.fromTo(
+        comp.current,
+        { xPercent: 1.4 },
+        {
+          xPercent: -1.4,
+          ease: "none",
+          scrollTrigger: {
+            trigger: comp.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 0.8,
+          },
+        },
+      );
     }, comp);
     return () => ctx.revert();
   }, []);
@@ -417,6 +434,48 @@ function Marquee() {
         ))}
       </div>
     </section>
+  );
+}
+
+/** Animated stat number: counts up from 0 to its value when it scrolls into view. */
+function StatValue({ value, className }: { value: string; className?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    registerGsap();
+    const el = ref.current;
+    if (!el) return;
+    const match = value.match(/^(\d+)(.*)$/);
+    if (!match) return; // e.g. "∞" — nothing to count.
+    const target = Number(match[1]);
+    const suffix = match[2] ?? "";
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.textContent = value;
+      return;
+    }
+    const state = { v: 0 };
+    const tween = gsap.to(state, {
+      v: target,
+      duration: 1.8,
+      ease: "power3.out",
+      scrollTrigger: { trigger: el, start: "top 90%", once: true },
+      onUpdate: () => {
+        el.textContent = `${Math.round(state.v)}${suffix}`;
+      },
+      onComplete: () => {
+        el.textContent = value;
+      },
+    });
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+    };
+  }, [value]);
+
+  return (
+    <span ref={ref} className={className}>
+      {value}
+    </span>
   );
 }
 
@@ -449,7 +508,7 @@ function StatsBand() {
             <Reveal delay={i * 0.06}>
               <div className="glass glass-hover h-full rounded-3xl p-7">
                 <p className="font-display text-5xl font-black tracking-tighter text-gradient-neon">
-                  {s.value}
+                  <StatValue value={s.value} />
                 </p>
                 <p className="mono-label mt-4 text-muted-foreground">{s.label}</p>
               </div>
@@ -616,9 +675,24 @@ function ClosingCta() {
               <Link
                 to="/contact"
                 data-magnetic
-                className="mono-label rounded-full bg-primary px-8 py-4 text-primary-foreground shadow-(--glow-cyan)"
+                className="mono-label group inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-primary-foreground shadow-(--glow-cyan)"
               >
                 Open the terminal
+                <svg
+                  className="h-4 w-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden
+                >
+                  <path
+                    className="[stroke-dasharray:28] [stroke-dashoffset:28] transition-[stroke-dashoffset] duration-500 ease-out group-hover:[stroke-dashoffset:0]"
+                    d="M5 12h14M13 6l6 6-6 6"
+                  />
+                </svg>
               </Link>
               <Link
                 to="/about"
@@ -641,7 +715,9 @@ function Home() {
       <RolesMobile />
       <Marquee />
       <StatsBand />
+      <StoryManifesto />
       <HorizontalShowcase />
+      <StoryProcess />
       <TechMarquee />
       <MediaPortfolio />
       <ClosingCta />

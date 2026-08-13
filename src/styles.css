@@ -247,6 +247,12 @@
   }
 }
 
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @utility caret-blink {
   animation: blink-caret 1.1s steps(1) infinite;
 }

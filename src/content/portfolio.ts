@@ -66,6 +66,12 @@ export type MediaData = { id: string; title: string; url: string; caption: strin
 export type Discipline = { title: string; body: string; items: string[] };
 export type TimelineEntry = { year: string; label: string };
 
+/** One line of the scroll-highlighted "Manifesto" section on the home page. */
+export type ManifestoLine = string;
+
+/** One step of the animated "How I ship" process pipeline on the home page. */
+export type ProcessStep = { id: string; step: string; title: string; body: string };
+
 export type SiteData = {
   profile: ProfileData;
   projects: ProjectData[];
@@ -74,6 +80,10 @@ export type SiteData = {
   videos: MediaData[];
   disciplines: Discipline[];
   timeline: TimelineEntry[];
+  manifesto: ManifestoLine[];
+  /** Lead-in paragraph shown above the process steps on the home page. */
+  processIntro: string;
+  process: ProcessStep[];
 };
 
 /* ============================================================================
@@ -106,7 +116,12 @@ export const profile: ProfileData = {
   insta: "https://www.instagram.com/itz_professionalofficial/",
 
   // Animated role rotation in the hero — each entry gets its own line/badge.
-  roles: ["Web developer", "Web designer too", "Professional Video editor", "Seamless AI media producer"],
+  roles: [
+    "Web developer",
+    "Web designer too",
+    "Professional Video editor",
+    "Seamless AI media producer",
+  ],
 
   // Scrolling text band under the hero.
   marquee: [
@@ -272,6 +287,52 @@ export const timeline: TimelineEntry[] = [
   { year: "2026", label: "Independent — building award-grade products end to end." },
 ];
 
+/* ============================================================================
+ *  📖  MANIFESTO — the scroll-highlighted "thesis" section on the home page.
+ *  Each line joins the big statement; words light up one by one as you scroll.
+ * ========================================================================== */
+export const manifesto: ManifestoLine[] = [
+  "Engineering is the easy part — making it feel inevitable is the craft.",
+  "I build interfaces that load fast, animate with intent,",
+  "and disappear into the experience they serve.",
+  "Every pixel has a job. Every frame has a reason.",
+];
+
+/* ============================================================================
+ *  🔄  PROCESS — the animated "How I ship" pipeline on the home page.
+ *  `step` is the big index shown next to each stage. `processIntro` is the
+ *  lead-in paragraph above the steps.
+ * ========================================================================== */
+export const processIntro =
+  "A controlled pipeline from first brief to live product — every phase has a clear exit criterion before the next one begins.";
+
+export const process: ProcessStep[] = [
+  {
+    id: "step-1",
+    step: "01",
+    title: "Discover",
+    body: "Strip the brief down to its core intent — users, goals, constraints — and define what done actually means before a single pixel moves.",
+  },
+  {
+    id: "step-2",
+    step: "02",
+    title: "Design",
+    body: "Motion language, type scale and palette converge into a system, not a page — prototypes that already feel alive before they are built.",
+  },
+  {
+    id: "step-3",
+    step: "03",
+    title: "Build",
+    body: "Typed, edge-fast code with GSAP choreography tuned to 60fps. No static mockup — the build is the design, verified in the browser.",
+  },
+  {
+    id: "step-4",
+    step: "04",
+    title: "Ship",
+    body: "Performance budgets, cross-device passes and launch — then measurement. Shipping is a beginning, not an end.",
+  },
+];
+
 /* Everything the site needs — imported by src/lib/store.ts */
 export const siteData: SiteData = {
   profile,
@@ -281,4 +342,7 @@ export const siteData: SiteData = {
   videos,
   disciplines,
   timeline,
+  manifesto,
+  processIntro,
+  process,
 };
