@@ -207,7 +207,7 @@ function HeroSequence() {
             style={{ willChange: "transform", transformStyle: "preserve-3d" }}
             className="relative z-10 mb-2 mt-4 h-[clamp(11rem,26vw,22rem)] w-[clamp(11rem,26vw,22rem)] shrink-0 group"
           >
-            <div className="absolute -inset-2 rounded-[2.5rem] bg-gradient-to-tr from-cyan-500/30 via-purple-500/20 to-primary/40 blur-xl transition-all duration-500" />
+            <div className="absolute -inset-2 rounded-[2.5rem] bg-linear-to-tr from-cyan-500/30 via-purple-500/20 to-primary/40 blur-xl transition-all duration-500" />
             <div className="relative h-full w-full -rotate-6 overflow-hidden rounded-[2.5rem] border-2 border-primary/40 bg-surface-high/80 p-2 shadow-2xl backdrop-blur-md">
               <img
                 src={profile.photo}
@@ -715,9 +715,9 @@ function Home() {
       <RolesMobile />
       <Marquee />
       <StatsBand />
-      <StoryManifesto />
-      <HorizontalShowcase />
       <StoryProcess />
+      <HorizontalShowcase />
+      <StoryManifesto />
       <TechMarquee />
       <MediaPortfolio />
       <ClosingCta />
