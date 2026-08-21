@@ -150,12 +150,12 @@ export const profile: ProfileData = {
 export const projects: ProjectData[] = [
   {
     id: "project-1",
-    title: "CyberVerce - filter catogory",
-    category: "E-comerce",
+    title: "Histogram - fully functional insta",
+    category: "insta clone",
     description:
-      "A simple Sylani Web-dev course assigment to simply add a filter using JS, but insect in me says make it super UI, so.....",
-    tech: "HTML, CSS, JS, fot this project",
-    url: "https://0wais-raza.github.io/CyberVerse/",
+      "A simple Sylani Web-dev course assigment to make posting app with firebase, but insect in me says make a instagram! so....",
+    tech: "REACT JS, GSAP, SUPABASE",
+    url: "https://histograam.vercel.app/",
     year: "2026",
   },
   {
@@ -170,12 +170,12 @@ export const projects: ProjectData[] = [
   },
   {
     id: "project-3",
-    title: "shown soon",
-    category: "Visual Brand",
+    title: "CyberVerce - filter catogory",
+    category: "e-comerce",
     description:
-      "An award-leaning studio site driven by GSAP scroll choreography and a custom WebGL shader background.",
+      "A simple Sylani Web-dev course assigment to simply add a filter using JS, but insect in me says make it super UI, so.....",
     tech: "Three.js, GSAP, GLSL, Lenis",
-    url: "https://gsap.com",
+    url: "https://0wais-raza.github.io/CyberVerse/",
     year: "2023",
   },
   {
